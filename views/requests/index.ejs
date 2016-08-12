@@ -11,6 +11,17 @@
           <div class="col-md-6">
             <h4 class="text-center"><b>Booking Requests Sent</b></h4>
             <hr>
+            <div class="list-group">
+              <!-- <% for (var i=0; i < reqBookings.length;i++) { %>
+                <h2> <%= reqBookings[i].bookingDate.toDateString(); %> </h2>
+              <% }; %> -->
+              <% for (var i=0; i < reqPads.length;i++) { %>
+                  <h4 class="list-group-item-heading"><%= reqPads[i].name; %> <span class="label label-primary">£<%= reqPads[i].price; %></span></h4>
+                  <h5 class="list-group-item-heading"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= reqPads[i].location; %></h5>
+                  <h6 class="list-group-item-heading"><i class="fa fa-calendar" aria-hidden="true"></i> <b>On <%= reqBookings[i].bookingDate.toDateString(); %></b></h6>
+                  <p class="list-group-item-text text-muted"><%= reqPads[i].description.substring(0, 200); %></p>
+                <% }; %>
+            </div>
           </div>
 
           <div class="col-md-6">

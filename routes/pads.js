@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
     title:      'Pad Listings',
     padList:    allPads
     });
+    console.log(allPads);
   });
 });
 

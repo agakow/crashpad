@@ -30,6 +30,7 @@
         </div>
 
         <div class="list-group">
+          <%= console.log(padList) %>
           <% for (var i=0; i < padList.length;i++) { %>
           <a href="/pads/<%= padList[i].id %>" class="list-group-item">
             <h4 class="list-group-item-heading"><%= padList[i].name; %> <span class="label label-primary">£<%= padList[i].price; %></span></h4>
