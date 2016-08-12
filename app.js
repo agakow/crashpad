@@ -33,15 +33,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-//init passport
-app.use(passport.initialize());
-app.use(passport.session());
-
 //Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Express session
 app.use(session({secret: 'secret', saveUninitialized: true, resave: true }));
+
+//init passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Connect Flash
 app.use(flash());

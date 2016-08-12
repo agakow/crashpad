@@ -4,14 +4,15 @@ var passport = require('../config/passport');
 /* GET users listing. */
 router.get('/new', function(req, res) {
   res.render('sessions/new', {
-    title:      'Log In'
+    title:      'Log In',
+    errors: req.flash('loginMessage')
   });
 });
 
 router.post('/', passport.authenticate('local-login', {
-    successRedirect : '/', // redirect to the secure profile section
-    failureRedirect : '/sessions/new' // redirect back to the signup page if there is an error
-    // failureFlash : true // allow flash messages
+    successRedirect : '/',
+    failureRedirect : '/sessions/new',
+    failureFlash: true
   }));
 
 router.get('/logout', function(req, res){
