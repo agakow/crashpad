@@ -6,6 +6,7 @@ router.get('/new', function(req, res) {
   res.render('sessions/new', {
     title:      'Log In'
   });
+  console.log(req.session.passport.user);
 });
 
 router.post('/', passport.authenticate('local-login', {
