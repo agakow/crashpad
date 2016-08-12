@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
-var connection = require('../config/sequelize.js');
+"use strict";
 
-  var Pad = connection.define('pad', {
+module.exports = function(sequelize, DataTypes) {
+
+  var Pad = sequelize.define("pad", {
     id: {
       primaryKey: true,
       type: Sequelize.INTEGER,
@@ -25,21 +27,13 @@ var connection = require('../config/sequelize.js');
     availableTo: {
       type: Sequelize.DATE
     }
-  });
-
-  var Booking = connection.define('booking', {
-    id: {
-      primaryKey: true,
-      type: Sequelize.INTEGER,
-      autoIncrement: true
-    },
-    bookingDate: {
-      type: Sequelize.DATE
+  }, {
+    classMethods: {
+      associate: function(models) {
+        Pad.belongsTo(models.user);
+      }
     }
   });
 
-  Pad.hasMany(Booking);
-
-  Pad.sync({force: false});
-
-  module.exports = Pad;
+  return Pad;
+};

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('../config/passport');
+var models  = require('../models');
+
 /* GET users listing. */
 router.get('/new', function(req, res) {
   res.render('sessions/new', {

@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var Pad = require('../models/pad');
-var Booking = require('../models/booking');
+var models  = require('../models');
 
 router.get('/', function(req, res, next) {
-  var allPads = Pad.findAll().then(function(allPads) {
+  var allPads = models.pad.findAll().then(function(allPads) {
     res.render('pads/index', {
     title:      'Pad Listings',
     padList:    allPads
@@ -19,12 +18,13 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var pad = Pad.create({name:     req.body.name,
+  var pad = models.pad.create({name:     req.body.name,
                   location:       req.body.location,
                   description:    req.body.description,
                   price:          req.body.price,
                   availableFrom:  req.body.availableFrom,
-                  availableTo:    req.body.availableTo
+                  availableTo:    req.body.availableTo,
+                  userId:         req.session.passport.user
   }).then(function(user) {
   res.redirect('/pads');
   });
@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
   var user_id = req.params.id;
-  var allPads = Pad.findAll({
+  var allPads = models.pad.findAll({
     where: {
       id: user_id
     }

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Pad = require('../models/pad');
-var Booking = require('../models/booking');
+var models  = require('../models');
 
 
 router.get('/', function(req, res, next) {
@@ -11,9 +10,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    var booking = Booking.create({
+    var booking = models.booking.create({
                   bookingDate:  req.body.bookingDate,
-                  padId:        req.body.padId
+                  padId:        req.body.padId,
+                  userId:       req.session.passport.user
     }).then(function(user) {
     res.redirect('/requests');
     });

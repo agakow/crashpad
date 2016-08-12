@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// var passport = require('../config/passport');
-var User = require('../models/user');
-
+var models  = require('../models');
+var bcrypt = require('bcrypt');
 
 /* GET users listing. */
 router.get('/new', function(req, res) {
@@ -24,21 +23,21 @@ router.post('/', function(req, res) {
 
   var errors = req.validationErrors();
 
-  User.findOne({where: { 'email' : req.body.email}}).then(function(user, err) {
+  models.user.findOne({where: { 'email' : req.body.email}}).then(function(user, err) {
       if(user) {
       req.flash('error_msg', 'Email is already registered');
       res.render('users/new', {title: 'Sign Up', errors: errors});
     } else if(errors) {
         res.render('users/new', {title: 'Sign Up', errors: errors});
       } else {
-        var newUser = User.build({
+        var newUser = models.user.build({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
           passwordDigest: req.body.password
         });
 
-        User.createUser(newUser, function(err, user){
+        createUser(newUser, function(err, user){
           if(err) throw err;
         });
         req.flash('success_msg', 'You are registered and can now log in');

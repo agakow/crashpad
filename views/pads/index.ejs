@@ -6,6 +6,29 @@
 
     <div class="container">
       <div class="col-md-6 col-md-offset-3">
+
+        <div class="row">
+          <form action="">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="from-date">From Date</label>
+                <input type="text" class="form-control" id="from-date" name="" placeholder="mm/dd/yyyy">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="from-date">To Date</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" id="to-date" name="" placeholder="mm/dd/yyyy">
+                  <span class="input-group-btn">
+                    <input class="btn btn-primary pull-right" type="submit" value="Filter">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
         <div class="list-group">
           <% for (var i=0; i < padList.length;i++) { %>
           <a href="/pads/<%= padList[i].id %>" class="list-group-item">
@@ -19,5 +42,17 @@
       </div>
     </div>
     <% include ../partials/page/footer.ejs %>
+    <script>
+      $(document).ready(function() {
+        $(function() {
+          $("#from-date").datepicker({
+            minDate: 0
+          });
+          $("#to-date").datepicker({
+            minDate: 0
+          });
+        });
+      });
+    </script>
   </body>
 </html>

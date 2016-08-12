@@ -31,17 +31,28 @@
           </div>
           <div class="form-group">
             <label for="available-from">Available From</label>
-            <input type="date" class="form-control" id="available-from" name="availableFrom">
+            <input type="text" class="form-control" id="available-from" name="availableFrom" placeholder="mm/dd/yyyy">
           </div>
           <div class="form-group">
             <label for="available-to">Available To</label>
-            <input type="date" class="form-control" id="available-to" name="availableTo">
+            <input type="text" class="form-control" id="available-to" name="availableTo" placeholder="mm/dd/yyyy">
           </div>
           <button type="submit" class="btn btn-primary pull-right">List my pad</button>
         </form>
       </div>
     </div>
-
     <% include ../partials/page/footer.ejs %>
+    <script>
+      $(document).ready(function() {
+        $(function() {
+          $("#available-from").datepicker({
+            minDate: 0
+          });
+          $("#available-to").datepicker({
+            minDate: 0
+          });
+        });
+      });
+    </script>
   </body>
 </html>
