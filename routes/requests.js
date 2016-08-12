@@ -3,7 +3,7 @@ var router = express.Router();
 var models  = require('../models');
 
 
-router.get('/', function(req, res, next) {
+router.get('/', isLoggedIn, function(req, res, next) {
   res.render('requests/index', {
     title: 'Requests'
   });
@@ -18,5 +18,11 @@ router.post('/', function(req, res, next) {
     res.redirect('/requests');
     });
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.session.user === 'undefined')
+        return next();
+    res.redirect('/sessions/new');
+  }
 
 module.exports = router;
