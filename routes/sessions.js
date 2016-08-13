@@ -3,22 +3,21 @@ var router = express.Router();
 var passport = require('../config/passport');
 var models  = require('../models');
 
-/* GET users listing. */
-router.get('/new', function(req, res) {
+router.get('/new', function(req, res, next) {
   res.render('sessions/new', {
-    title:      'Log In'
+    title:      'Log In',
+    error_msg: req.flash('loginMessage')
   });
-  console.log(req.session.passport.user);
 });
 
 router.post('/', passport.authenticate('local-login', {
     successRedirect : '/pads',
-    failureRedirect : '/sessions/new'
+    failureRedirect : '/sessions/new',
+    failureFlash : true
   }));
 
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res, next){
    req.logout();
-   req.session.destroy();
    res.redirect('/');
   });
 

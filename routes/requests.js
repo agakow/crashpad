@@ -5,7 +5,8 @@ var models  = require('../models');
 
 router.get('/', isLoggedIn, function(req, res, next) {
   res.render('requests/index', {
-    title: 'Requests'
+    title: 'Requests',
+    message: req.flash('loginMessage')
   });
 });
 
@@ -20,7 +21,7 @@ router.post('/', function(req, res, next) {
 });
 
 function isLoggedIn(req, res, next) {
-    if (req.session.user === 'undefined')
+    if (req.isAuthenticated())
         return next();
     res.redirect('/sessions/new');
   }

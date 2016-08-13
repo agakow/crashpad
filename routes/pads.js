@@ -18,7 +18,8 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var pad = models.pad.create({name:     req.body.name,
+  var pad = models.pad.create({
+                  name:           req.body.name,
                   location:       req.body.location,
                   description:    req.body.description,
                   price:          req.body.price,

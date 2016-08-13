@@ -3,7 +3,6 @@ var router = express.Router();
 var models  = require('../models');
 var bcrypt = require('bcrypt');
 
-/* GET users listing. */
 router.get('/new', function(req, res) {
   res.render('users/new', {
     title: 'Sign Up'
