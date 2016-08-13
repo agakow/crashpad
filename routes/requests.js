@@ -10,7 +10,7 @@ router.get('/', isLoggedIn, function(req, res, next) {
   });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', isLoggedIn, function(req, res, next) {
     var booking = models.booking.create({
                   bookingDate:  req.body.bookingDate,
                   padId:        req.body.padId,

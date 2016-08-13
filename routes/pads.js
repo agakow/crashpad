@@ -6,14 +6,14 @@ router.get('/', function(req, res, next) {
   var allPads = models.pad.findAll().then(function(allPads) {
     res.render('pads/index', {
     title:      'Pad Listings',
-    padList:    allPads
+    padList:    allPads,
     });
   });
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', isLoggedIn, function(req, res, next) {
   res.render('pads/new', {
-    title:      'List New Pad'
+    title: 'List New Pad'
   });
 });
 
@@ -32,11 +32,8 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  var user_id = req.params.id;
   var allPads = models.pad.findAll({
-    where: {
-      id: user_id
-    }
+    where: { id: req.params.id }
   }).then(function(allPads) {
     res.render('pads/pad', {
     title:      'Pad Booking',
@@ -44,5 +41,26 @@ router.get('/:id', function(req, res, next) {
     });
   });
 });
+
+router.get('/mypads/:id', isLoggedIn, function(req, res) {
+  var userPads = models.pad.findAll({
+    where: { userId: req.params.id }
+    }).then(function(userPads){
+    res.render('pads/mypads', {
+    title:    'My Pad Listings',
+    padList:   userPads,
+    });
+  });
+});
+
+// router.get('/:availableFrom/:availableTo', function(req, res, next) {
+//   models.pad.findAll({ where: {availableFrom: req.param.availableFrom, }})
+// });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/sessions/new');
+  }
 
 module.exports = router;
