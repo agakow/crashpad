@@ -69,6 +69,7 @@ app.use(function (req, res, next) {
   res.locals.errors = req.flash('errors');
   res.locals.user = req.user || null;
   res.locals.session = req.session;
+  res.locals.isloggedIn = req.isAuthenticated();
   next();
 });
 
