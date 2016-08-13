@@ -5,18 +5,18 @@ var models  = require('../models');
 
 router.get('/new', function(req, res, next) {
   res.render('sessions/new', {
-    title:      'Log In',
-    error_msg: req.flash('loginMessage')
+    title: 'Sign In',
+    error_msg: req.flash('signInError')
   });
 });
 
-router.post('/', passport.authenticate('local-login', {
+router.post('/', passport.authenticate('local-signIn', {
     successRedirect : '/pads',
     failureRedirect : '/sessions/new',
     failureFlash : true
   }));
 
-router.get('/logout', function(req, res, next){
+router.get('/signout', function(req, res, next){
    req.logout();
    res.redirect('/');
   });

@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 module.exports = function(passport) {
 //passport session setup
 
-passport.use('local-login', new LocalStrategy({
+passport.use('local-signIn', new LocalStrategy({
     usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true
@@ -18,10 +18,10 @@ passport.use('local-login', new LocalStrategy({
           return done(err);
         }
         if(!user){
-          return done(null, false, req.flash('loginMessage', 'Email is not registered. Please sign up.'));
+          return done(null, false, req.flash('signInError', 'Email is not registered. Please sign up.'));
         }
         if(!bcrypt.compareSync(password, user.passwordDigest)){
-          return done(null, false, req.flash('loginMessage', 'The password is incorrect.'));
+          return done(null, false, req.flash('signInError', 'The password is incorrect.'));
         }
         return done(null, user);
       });
