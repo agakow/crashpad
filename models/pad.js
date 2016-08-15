@@ -1,5 +1,9 @@
+/* jshint esversion: 6 */
+(function () {
+   'use strict';
+}());
+
 var Sequelize = require('sequelize');
-"use strict";
 
 module.exports = function(sequelize, DataTypes) {
 

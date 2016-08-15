@@ -14,20 +14,27 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        <% if(isloggedIn) { %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pads <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/pads/new">Add Pad</a></li>
             <li><a href="/pads">View Pads</a></li>
+            <li><a href="/pads/new">Add Pad</a></li>
+            <li><a href="/pads/mypads/<%= user.id %>">My Pads</a></li>
           </ul>
         </li>
+        <li><a href="/requests">Requests</a></li>
+        <% } else { %>
+        <li><a href="/pads">Pads</a></li>
+        <% } %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/requests">Requests</a></li>
         <a href="/users/new" class="btn btn-primary navbar-btn">Sign Up</a>
-        <a href="/sessions/new" class="btn btn-primary navbar-btn">Sign In</a>
+        <% if(!isloggedIn) { %>
+         <a href="/sessions/new" class="btn btn-primary navbar-btn">Sign In</a>
+        <% } else { %>
+           <a href="/sessions/signout" class="btn btn-primary navbar-btn">Sign Out</a>
+        <% } %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->

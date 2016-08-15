@@ -15,9 +15,14 @@
         <br>
         <form method="post" action="/requests">
           <div class="form-group">
-            <label for="available-from">Pick A Night</label>
+            <label for="available-from">From</label>
             <input type="hidden" name="padId" value="<%= padList[0].id; %>">
-            <input type="text" class="form-control" id="available-from" name="bookingDate" placeholder="mm/dd/yyyy">
+            <input type="text" class="form-control" id="available-from" name="bookingDateFrom" placeholder="mm/dd/yyyy">
+          </div>
+          <div class="form-group">
+            <label for="available-from">To</label>
+            <input type="hidden" name="padId" value="<%= padList[0].id; %>">
+            <input type="text" class="form-control" id="available-from" name="bookingDateTo" placeholder="mm/dd/yyyy">
           </div>
           <input class="btn btn-primary btn-lg pull-right" type="submit" value="Request to Book">
         </form>

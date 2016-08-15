@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models  = require('../models');
 
-
-router.get('/', function(req, res, next) {
+router.get('/', isLoggedIn, function(req, res, next) {
   var user_id = req.session.passport.user;
   var userRequestedBookings = models.booking.findAll({
     where: {
@@ -24,8 +23,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
-router.post('/', function(req, res, next) {
+router.post('/', isLoggedIn, function(req, res, next) {
     var booking = models.booking.create({
                   bookingDate:  req.body.bookingDate,
                   padId:        req.body.padId,
@@ -34,5 +32,11 @@ router.post('/', function(req, res, next) {
     res.redirect('/requests');
     });
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/sessions/new');
+  }
 
 module.exports = router;

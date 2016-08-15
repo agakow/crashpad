@@ -1,6 +1,8 @@
+/* jshint esversion: 6 */
+(function () {
+   'use strict';
+}());
 var Sequelize = require('sequelize');
-
-"use strict";
 
 module.exports = function(sequelize, DataTypes) {
   var Booking = sequelize.define("booking", {
@@ -9,7 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       type: Sequelize.INTEGER,
       autoIncrement: true
     },
-    bookingDate: {
+    bookingDateFrom: {
+      type: Sequelize.DATE
+    },
+    bookingDateTo: {
       type: Sequelize.DATE
     }
   }, {
