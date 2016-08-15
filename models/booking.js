@@ -11,7 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       type: Sequelize.INTEGER,
       autoIncrement: true
     },
-    bookingDate: {
+    bookingDateFrom: {
+      type: Sequelize.DATE
+    },
+    bookingDateTo: {
       type: Sequelize.DATE
     }
   }, {
